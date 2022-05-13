@@ -1,0 +1,34 @@
+{% extends 'App_Blood/base.html' %}
+{% load static %}
+{% block content %}
+<section class="pt-80 pb-80 position-relative z-index-2 overflow-hidden">
+    <div class="top-el-bg">
+        <img src="{% static 'assets/images/frontend/blood/60fff77d8bf601627387773.png' %}" alt="image">
+    </div>
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-6 text-center">
+                <div class="section-header mb-5">
+                    <h2 class="section-title">Branch List</h2>
+                </div>
+            </div>
+        </div>
+
+        <div class="row justify-content-center gy-4">
+            {% for b in branch_list %}
+            <div class="col-lg-6 col-sm-12 col-md-6">
+                    <div class="avaiable-blood-single has--link">
+                        <a href="{% url 'App_Blood:single_branch' b.id %}" class="item--link"></a>
+                        <h6 class="avaiable-blood-single__name">
+                          {{ b.name }}</h6>
+                        <p class="avaiable-blood-single__amount">Start On : {{ b.created }}</p>
+                        <span class="avaiable-blood-single__amount">Total Member 8</span>
+                    </div>
+                </div>
+            {% empty %}
+            <h5>There is no Branch yet.</h5>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+{% endblock %}

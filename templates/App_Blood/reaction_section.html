@@ -1,0 +1,7 @@
+<form method="post" class="scope-like" action="{% url 'App_Blood:bloglike' %}">{% csrf_token %}
+{% if is_liked  %}
+<button type="submit" id="bloglikeid" name="blog_id" value="{{ blog_post.id }}" class="btn btn-danger btn-sm"><i class="fa fa-thumbs-down" aria-hidden="true"></i>  &nbsp; {{ blog_post.like_count }}</button>
+{% else %}
+ <button type="submit" id="bloglikeid"  name="blog_id" value="{{ blog_post.id }}" class="btn btn-success btn-sm"><i class="fa fa-thumbs-up" aria-hidden="true"></i> &nbsp;  {{ blog_post.like_count }}</button>
+{% endif %}
+</form>

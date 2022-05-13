@@ -1,0 +1,101 @@
+{% extends 'App_Blood/base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block content %}
+<div class="main-wrapper">
+            <section class="inner-hero bg_img overlay--one" style="background-image: url('{% static 'assets/images/frontend/breadcrumb/61023f89990b81627537289.jpg' %}');">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-6 text-center">
+                <h2 class="page-title text-white">Contact Us</h2>
+                <ul class="page-breadcrumb justify-content-center">
+                    <li><a href="{% url 'App_Blood:index' %}">Home</a></li>
+                    <li>Contact Us</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
+<section class="pt-100 pb-100 position-relative z-index">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-6">
+                <div class="section-header text-center">
+                    <h2 class="section-title">Get in touch for any kind of help and informations</h2>
+                </div>
+            </div>
+        </div>
+        {%for message in messages %}
+                    {%if "contact" in message.tags %}
+                      <div class="alert alert-success alert-dismissible fade show" role="alert">
+                          <strong>{{ message }}</strong>
+                          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                    {% endif %}
+             {% endfor %}
+        <div class="contact-wrapper">
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="contact-wrapper-content section--bg2 h-100">
+                        <h4 class="title text-white mb-4">Reach Us</h4>
+                        <ul class="contact-info-list">
+                            <li class="single-info d-flex flex-wrap align-items-center">
+                                <div class="single-info__icon text-white d-flex justify-content-center align-items-center rounded-3">
+                                    <i class="las la-map-marked-alt"></i>
+                                </div>
+                                <div class="single-info__content">
+                                    <p>Usa , New York</p>
+                                </div> 
+                            </li>
+
+                            <li class="single-info d-flex flex-wrap align-items-center">
+                                <div class="single-info__icon text-white d-flex justify-content-center align-items-center rounded-3">
+                                    <i class="las la-envelope"></i>
+                                </div>
+                                <div class="single-info__content">
+                                    <p><a href=""><span class="__cf_email__" data-cfemail="98fcfdf5f7d8fff5f9f1f4b6fbf7f5">[email&#160;protected]</span></a></p>
+                                </div> 
+                            </li>
+
+                            <li class="single-info d-flex flex-wrap align-items-center">
+                                <div class="single-info__icon text-white d-flex justify-content-center align-items-center rounded-3">
+                                    <i class="las la-phone-volume"></i>
+                                </div>
+                                <div class="single-info__content">
+                                    <p><a href="tel:44983456780">44983456780</a></p>
+                                </div> 
+                            </li>
+                            
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <form method="POST" action="{% url 'App_Blood:contact' %}" class="contact-form">{% csrf_token %}
+                        <div class="row">
+                            <div class="form-group col-xl-6">
+                                {{ form.name|as_crispy_field }}
+                            </div>
+                            <div class="form-group col-xl-6">
+                               {{ form.email|as_crispy_field }}
+                            </div>
+                            <div class="form-group col-lg-12">
+                               {{ form.subject|as_crispy_field }}
+                            </div>
+                            <div class="form-group col-lg-12">
+                                {{ form.message|as_crispy_field }}
+                            </div>
+                            <input type="hidden" name="next" value="{{ request.path }}">
+                            <div class="col-lg-12">
+                                <button type="submit" class="btn btn--base w-100">Submit Now</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+        </div>
+{% endblock %}

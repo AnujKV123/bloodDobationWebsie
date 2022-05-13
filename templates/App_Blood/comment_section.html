@@ -1,0 +1,39 @@
+<h3>Comment </h3>
+<form class="scope-comment-form form-block form-plr-15 form-h-45 form-mb-20 form-brdr-lite-white mb-md-50" action="{% url 'App_Blood:blog_details' blog_post.id %}" method="post">{% csrf_token %}
+    {{ comment_form  }}
+    <button class="btn btn--base" style="margin-top: 2%;"  type="submit"><b>COMMENT</b></button>
+</form>
+
+
+<h4 class="p-title mt-20" style="margin-top: 2%;"><b>{{ comments.count }} COMMENTS</b></h4>
+<div style="max-height: 1200px;overflow: auto;">
+    {% for comment in comments %}
+        <div class="blockquote">
+            <p class="mb-4">{{ comment.content }}</p>
+            <footer class="blockquote-footer">by {{ comment.user }}
+               <i class="scope-reply-btn" style="background: #ff9400;margin: 2px 3px;cursor: pointer;padding: 5px 14px;border-radius: 6px;color: #fff;">Reply</i>
+            </footer>
+        </div>
+        <div class="scope-replied-comments container mt-2 ml-40" style="display: none;padding: 2% 4%;">
+            {% for reply in comment.replies.all %}
+                <div class="blockquote">
+                    <p class="mb-4">{{ reply.content }}</p>
+                    <footer class="blockquote-footer">by {{ reply.user }}
+                        <code>{{ reply.timestamp|timesince }} </code>
+                    </footer>
+                </div>
+            {% endfor %}
+            <div class="form-group row ml-60 ">
+                <form class="scope-reply-form form-block form-plr-15 form-h-45 form-mb-20 form-brdr-lite-white mb-md-50" action="{% url 'App_Blood:blog_details' blog_post.id %}" method="post">
+                    {% csrf_token %}
+                    <input type="hidden" name="comment_id" value="{{ comment.id }}">
+                    {{ comment_form  }}
+                    <button class="btn btn-success my-2" style="margin-top: 2%;" type="submit"><b>REPLY</b></button>
+                </form>
+
+            </div>
+
+        </div>
+
+    {% endfor %}
+</div>

@@ -1,0 +1,28 @@
+/*
+Your customized CSS
+*/
+.container_showPopUp{
+    position: absolute;
+    width: 50%;
+    height: 5%;
+    top: 2%;
+    left: 25%;
+    z-index: 2;
+    background-color: white;
+    display: none;
+}
+.container_hopital{
+    padding: 10px;
+}
+.container_contactDetail{
+    display: flex;
+    flex-direction: row;
+    /* text-align: center;
+    justify-content: center;
+    align-items: center; */
+    margin-top: 20px;
+}
+.container_contactDetail p{
+    padding-left: 30px;
+    padding-right: 30px;
+}

@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BloodLab - Home</title>
+  <meta name="title" Content="BloodLab - Home">
+  <meta name="description" content="Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit">
+  <meta name="keywords" content="BloodLab,Blood Donation,Blood Donation Platform">
+  <link rel="shortcut icon" href="{% static 'assets/images/logoIcon/favicon.png' %}" type="image/x-icon">
+  <link rel="apple-touch-icon" href="{% static 'assets/images/logoIcon/logo.png' %}">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="apple-mobile-web-app-title" content="BloodLab - Home">
+  <meta itemprop="name" content="BloodLab - Home">
+  <meta itemprop="description" content="">
+  <meta itemprop="image" content="{% static 'assets/images/seo/61093a8563ade1627994757.jpg' %}">
+
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="BloodLab - Blood Donation Platform">
+    <meta property="og:description" content="Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit ff">
+    <meta property="og:image" content="{% static 'assets/images/seo/61093a8563ade1627994757.jpg' %}"/>
+    <meta property="og:image:type" content="image/jpg" />
+        <meta property="og:image:width" content="600" />
+    <meta property="og:image:height" content="315" />
+    <meta property="og:url" content="https://script.viserlab.com/bloodlab">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="icon" type="image/png" href="{% static 'assets/images/logoIcon/favicon.png' %}" sizes="16x16">
+  <link rel="stylesheet" href="{% static 'assets/templates/basic/frontend/css/lib/bootstrap.min.css' %}">
+  <link rel="stylesheet" href="{% static 'assets/templates/basic/frontend/css/all.min.css' %}">
+  <link rel="stylesheet" href="{% static 'assets/templates/basic/frontend/css/line-awesome.min.css' %}">
+  <link rel="stylesheet" href="{% static 'assets/templates/basic/frontend/css/lightcase.css' %}">
+  <link rel="stylesheet" href="{% static 'assets/templates/basic/frontend/css/lib/slick.css' %}">
+  <link rel="stylesheet" href="{% static 'assets/templates/basic/frontend/css/main.css' %}">
+  <link rel="stylesheet" href="{% static 'assets/templates/basic/css/custom.css' %}">
+  <style>
+      @media all and (min-width: 992px) {
+	.navbar .nav-item .dropdown-menu{ display: none; }
+	.navbar .nav-item:hover .nav-link{   }
+	.navbar .nav-item:hover .dropdown-menu{ display: block; }
+	.navbar .nav-item .dropdown-menu{ margin-top:0; }
+}
+  </style>
+  <link href="{% static 'assets/templates/basic/frontend/css/color.php?color=FB3640&secondColor=17173A' %}" rel="stylesheet"/>
+</head>
+<body>
+<div class="scroll-to-top">
+            <span class="scroll-icon">
+                <i class="las la-arrow-up"></i>
+            </span>
+        </div>
+       <div class="preloader-holder">
+              <div class="preloader">
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+              </div>
+        </div>
+        <header class="header">
+    <div class="header__top">
+        <div class="container">
+            <div class="row align-items-center gy-2">
+                <div class="col-lg-6 col-md-8 col-sm-9">
+                    <ul class="header__info-list d-flex flex-wrap align-items-center justify-content-sm-start justify-content-center">
+                        <li><a href="tel:44983456780"><i class="las la-phone"></i> 44983456780</a></li>
+                        <li><a href=""><i class="las la-envelope"></i> <span class="__cf_email__" data-cfemail="d8bcbdb5b798bfb5b9b1b4f6bbb7b5">[email&#160;protected]</span></a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-6 col-md-4 col-sm-3 text-sm-end text-center">
+                     {% load tz %}
+                           <p class="text-light"> {{ today }}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="header__bottom">
+        <div class="container">
+            <nav class="navbar navbar-expand-xl p-0 align-items-center">
+                <a class="site-logo site-title" href="{% url 'App_Blood:index' %}">
+                    <img src="{% static 'assets/images/logoIcon/logo.png' %}" alt="logo">
+                </a>
+                <button class="navbar-toggler ms-auto" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="menu-toggle"></span>
+                </button>
+                <div class="collapse navbar-collapse mt-lg-0 mt-3" id="navbarSupportedContent">
+                    <ul class="navbar-nav main-menu ms-auto">
+                        <li><a href="{% url 'App_Blood:index' %}">Home</a></li>
+                        <li><a href="{% url 'App_Blood:about' %}">About</a></li>
+                        <!-- <li><a href="{% url 'App_Blood:doner' %}">Donor</a></li> -->
+                        <li><a href="{% url 'App_Blood:branches' %}">Branches</a></li>
+                        <li><a href="{% url 'App_Blood:blog' %}">Blog</a></li>
+                        <li><a href="{% url 'App_Blood:contact' %}">Contact</a></li>
+                    </ul>
+                    {% if request.user.is_authenticated == False %}
+                    <div class="nav-right">
+                        <a href="{% url 'App_Accounts:signup' %}" class="btn btn-md btn--base d-flex align-items-center" >
+                            <i class="las la-user fs--18px me-2"></i>Signup</a>
+                    </div>
+                    <div class="nav-right">
+                        <a href="{% url 'App_Accounts:HRlogin' %}" class="btn btn-md btn--base d-flex align-items-center">
+                            <i class="las la-user fs--18px me-2"></i>Hospital Login</a>
+                    </div>
+                    {% else %}
+                         <div class="nav-right">
+                        <a href="{% url 'App_Accounts:dashboard' %}" class="btn btn-md btn--base d-flex align-items-center">
+                            <i class="las la-user fs--18px me-2"></i>Dashboard</a>
+                    </div>
+                    {% endif %}
+                </div>
+            </nav>
+        </div>
+    </div>
+</header>
+
+{% block content %}
+
+{% endblock %}
+
+<footer class="footer img-overlay bg_img" style="background-image: url({% static 'assets/images/frontend/footer/61023b2b0ac1b1627536171.jpg' %});">
+    <div class="footer__top">
+        <div class="container">
+            <div class="footer-info-area">
+                <div class="row align-items-center gy-4">
+                    <div class="col-lg-9">
+                        <ul class="footer-contact-list justify-content-lg-start justify-content-center">
+                            <li>
+                                <div class="icon">
+                                    <i class="las la-phone-volume"></i>
+                                </div>
+                                <div class="content">
+                                    <a href="tel:44983456780">44983456780</a>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="icon">
+                                    <i class="las la-envelope"></i>
+                                </div>
+                                <div class="content">
+                                    <a href="">
+                                        <span class="__cf_email__" data-cfemail="">[email&#160;protected]</span></a>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="col-lg-3 text-lg-end text-center">
+                        <a href="#" class="btn btn--base">Blood Donor</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row gy-5 justify-content-between">
+                <div class="col-xl-4 col-lg-4 col-sm-8 order-lg-1 order-1">
+                    <div class="footer-widget">
+                        <a href="https://script.viserlab.com/bloodlab" class="footer-logo">
+                            <img src="{% static 'assets/images/logoIcon/logo.png' %}" alt="logo"></a>
+                        <p class="mt-3">Animi sequi aliquam illum voluptatum ratione, quaerat dignissimos fugiat. Ea, vitae odio quasi aspernatur expedita maiores, quidem voluptates libero quaerat fugiat nisi, ratione inventore iusto nostrum voluptas sint culpa.</p>
+                        <form class="subscribe-form mt-4">
+                            <input type="email" name="email" id="emailSub" class="form--control" placeholder="Enter email address">
+                            <button type="button" class="subscribe-btn"><i class="lab la-telegram-plane"></i></button>
+                        </form>
+                    </div>
+                </div>
+                <div class="col-xl-2 col-lg-3 col-sm-6 order-lg-2 order-3">
+                    <div class="footer-widget">
+                        <h4 class="footer-widget__title">Short Links</h4>
+                        <ul class="footer-links-list">
+                                                            <li><a href="">About</a></li>
+                                                            <li><a href="">Donor</a></li>
+                                                            <li><a href="">Blog</a></li>
+                                                            <li><a href="">Contact</a></li>
+                                                    </ul>
+                    </div>
+                </div>
+                <div class="col-xl-2 col-lg-3 col-sm-6 order-lg-3 order-4">
+                    <div class="footer-widget">
+                        <h4 class="footer-widget__title">Support</h4>
+                        <ul class="footer-links-list">
+                            <li><a href="{% url 'App_Blood:contact' %}">Support Center</a></li>
+                            <li><a href="{% url 'App_Accounts:signup' %}">Apply as a Donor</a></li>
+                            <li><a href="{% url 'App_Blood:privacy' %}">Privacy Policy</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-xl-2 col-lg-2 col-sm-4 order-lg-4 order-2">
+                    <div class="footer-widget">
+                        <ul class="footer-overview-list text-end">
+                            <li class="footer-overview">
+                                <h4 class="footer-overview__number">4523</h4>
+                                <p class="footer-overview__caption">Donors</p>
+                            </li>
+                            <li class="footer-overview">
+                                <h4 class="footer-overview__number">5324</h4>
+                                <p class="footer-overview__caption">Volunteers</p>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="footer__bottom">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                    <p>Copyright © 2021 <a href="" class="text--base"> BloodLab </a> All Right Reserved</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+
+        <script data-cfasync="false" src="{% static 'assets/templates/basic/frontend/js/email-decode.min.js' %}"></script>
+        <script src="{% static 'assets/templates/basic/frontend/js/lib/jquery-3.6.0.min.js' %}"></script>
+        <script src="{% static 'assets/templates/basic/frontend/js/lib/bootstrap.bundle.min.js' %}"></script>
+        <script src="{% static 'assets/templates/basic/frontend/js/lib/slick.min.js' %}"></script>
+        <script src="{% static 'assets/templates/basic/frontend/js/lib/wow.min.js' %}"></script>
+        <script src="{% static 'assets/templates/basic/frontend/js/lib/lightcase.js' %}"></script>
+        <script src="{% static 'assets/templates/basic/frontend/js/app.js' %}"></script>
+        <link rel="stylesheet" href="{% static 'assets/global/css/iziToast.min.css' %}">
+        <script src="{% static 'assets/global/js/iziToast.min.js' %}"></script>
+
+<script>
+    "use strict";
+    function notify(status,message) {
+        iziToast[status]({
+            message: message,
+            position: "topRight"
+        });
+    }
+</script>
+        <script>
+            (function ($) {
+                "use strict";
+                $(".langSel").on("change", function() {
+                    window.location.href = "https://script.viserlab.com/bloodlab/change/"+$(this).val() ;
+                });
+            })(jQuery);
+        </script>
+
+<script>
+  var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+  (function(){
+    var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+    s1.async=true;
+    s1.src='https://embed.tawk.to/5fe0b9b2a8a254155ab5421d/1eq2tap1m';
+    s1.charset='UTF-8';
+    s1.setAttribute('crossorigin','*');
+    s0.parentNode.insertBefore(s1,s0);
+  })();
+</script>
+
+<script>
+    adroll_adv_id = "YXRNNTO7ZBAMFBH67UUE5M";
+    adroll_pix_id = "MMQQDWGN25EXPHGRPA3NLR";
+    adroll_version = "2.0";
+    (function(w, d, e, o, a) {
+        w.__adroll_loaded = true;
+        w.adroll  = w.adroll  || [];
+        w.adroll.f = [ 'setProperties', 'identify', 'track' ];
+        var roundtripUrl = "https://s.adroll.com/j/" + adroll_adv_id
+                + "/roundtrip.js";
+        for (a = 0; a < w.adroll.f.length; a++) {
+            w.adroll[w.adroll.f[a]] = w.adroll[w.adroll.f[a]] || (function(n) {
+                return function() {
+                    w.adroll.push([ n, arguments ])
+                }
+            })(w.adroll.f[a])
+        }
+        e = d.createElement('script');
+        o = d.getElementsByTagName('script')[0];
+        e.async  = 1;
+        e.src  = roundtripUrl;
+        o.parentNode.insertBefore(e, o);
+    })(window, document);
+    adroll.track("pageView");
+</script>
+<div id="fb-root"></div>
+<script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_GB/sdk.js#xfbml=1&version=v12.0" nonce="YolEAWw6"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+   <script type="text/javascript">
+       document.addEventListener("DOMContentLoaded", function(){
+// make it as accordion for smaller screens
+if (window.innerWidth > 992) {
+
+	document.querySelectorAll('.navbar .nav-item').forEach(function(everyitem){
+
+		everyitem.addEventListener('mouseover', function(e){
+
+			let el_link = this.querySelector('a[data-bs-toggle]');
+
+			if(el_link != null){
+				let nextEl = el_link.nextElementSibling;
+				el_link.classList.add('show');
+				nextEl.classList.add('show');
+			}
+
+		});
+		everyitem.addEventListener('mouseleave', function(e){
+			let el_link = this.querySelector('a[data-bs-toggle]');
+
+			if(el_link != null){
+				let nextEl = el_link.nextElementSibling;
+				el_link.classList.remove('show');
+				nextEl.classList.remove('show');
+			}
+
+
+		})
+	});
+
+}
+// end if innerWidth
+});
+      $(document).ready(function (event) {
+           $(".scope-reply-btn").click(function () {
+          $(this).parent().parent().next(".scope-replied-comments").fadeToggle();
+        });
+
+      $(document).on("submit", ".scope-comment-form", function (event) {
+         console.log("scope comment");
+         event.preventDefault();
+         $.ajax({
+           type: "POST",
+           url: $(this).attr("action"),
+           data: $(this).serialize(),
+           dataType: "json",
+           success: function (response) {
+             $(".scope-comment-section").html(response["form"]);
+             $("textarea").val("");
+             $(".scope-reply-btn").click(function () {
+               $(this)
+                 .parent()
+                 .parent()
+                 .next(".scope-replied-comments")
+                 .fadeToggle();
+             });
+             $("textarea").val("");
+           },
+           error: function (rs, e) {
+             console.log(rs.responseText);
+           },
+         });
+       });
+      $(document).on('click','#bloglikeid',function(event) {
+            event.preventDefault();
+           var pk=$(this).attr('value');
+           $.ajax({
+              type:'POST',
+              url:'{% url 'App_Blood:bloglike' %}',
+              data:{'blog_id':pk,'csrfmiddlewaretoken':'{{ csrf_token }}'},
+              dataType:'json',
+              success : function (response) {
+                  $("#blog-section").html(response['form']);
+                  console.log("done");
+              },
+              error: function (rs,e) {
+                  console.log(rs.responseText);
+              }
+           });
+        });
+
+      $(document).on("submit", ".scope-reply-form", function (event) {
+          console.log("ok");
+          event.preventDefault();
+          $.ajax({
+            type: "POST",
+            url: $(this).attr("action"),
+            data: $(this).serialize(),
+            dataType: "json",
+            success: function (response) {
+              $(".scope-comment-section").html(response["form"]);
+              $("textarea").val("");
+              $(".scope-reply-btn").click(function () {
+                $(this)
+                  .parent()
+                  .parent()
+                  .next(".scope-replied-comments")
+                  .fadeToggle();
+              });
+              $("textarea").val("");
+            },
+            error: function (rs, e) {
+              console.log(rs.responseText);
+            },
+          });
+        });
+
+      })
+function OpenHPopup(){
+    var x = document.getElementById("bloodidXXX").value
+    var y = document.getElementById("bloodidyyy").value
+    if(y == "Ranchi"){
+        document.querySelector("#hospital1").innerHTML = " 1. Abdur Razzaque Ansari, Memorial Weaver's Hospital (Apollo Hospital Group)";
+        document.querySelector("#hospitalLocation1").innerHTML = "Irba, Ranchi, Irba, Dist. Ranchi";
+        document.querySelector("#email1").innerHTML = "0651- 2275699/2275899/22 276041";
+        document.querySelector("#contact1").innerHTML = "rch_apollorn@sancharnet.in";
+        document.querySelector("#hospital2").innerHTML = " 2. Archi Jharkhand Blood Bank";
+        document.querySelector("#hospitalLocation2").innerHTML = "Archi Jharkhand Blood Bank Baxi Compound Avenue Road, Near Dr. J Sharan , Bariatu, Ranchi Pvt., Bariatu, Dist. Ranchi";
+        document.querySelector("#email2").innerHTML = "7992248361";
+        document.querySelector("#contact2").innerHTML = "archijharkhandbloodbank@gmail.com";
+    }
+    else if(y == "Dhanbad"){
+        document.querySelector("#hospital1").innerHTML = " 1. Blood Bank Asian Dwarkadas Jalan Memorial Hospital";
+        document.querySelector("#hospitalLocation1").innerHTML = "Bartand, Near City Centre, Dhanbad, C/o Asian Dwarkadas Jalan Super Specialty Hospital, Dhanbad, Dist. Dhanbad";
+        document.querySelector("#email1").innerHTML = "7004177103";
+        document.querySelector("#contact1").innerHTML = "jalanbloodbank@gmail.com";
+        document.querySelector("#hospital2").innerHTML = " 2. Blood Bank, Patliputra Medical Collage & Hospital Saraydhela, Dhanbad";
+        document.querySelector("#hospitalLocation2").innerHTML = "Blood Bank, Patliputra Medical Collage & Hospital Saraydhela, Dhanbad, Dhanbad, Dist. Dhanbad";
+        document.querySelector("#email2").innerHTML = "9234433702";
+        document.querySelector("#contact2").innerHTML = "bloodbankpmch@gmail.com";
+    }
+    else if(y == "Jamshedpur"){
+        document.querySelector("#hospital1").innerHTML = " 1. Blood Transfusion Unit TATA Steel Hospital";
+        document.querySelector("#hospitalLocation1").innerHTML = "Tata steel Hospital Noamundi, Noamundi, Dist. Pashchimi Singhbhum";
+        document.querySelector("#email1").innerHTML = "9031055738";
+        document.querySelector("#contact1").innerHTML = "vijay.topno@tatasteel.com";
+        document.querySelector("#hospital2").innerHTML = " 2. Blood Transfusion Unit, TISCO Hospital";
+        document.querySelector("#hospitalLocation2").innerHTML = "TISCO Hospital, Noamundi, Dist. Pashchimi Singhbhum";
+        document.querySelector("#email2").innerHTML = "7369014332";
+        document.querySelector("#contact2").innerHTML = "dhirendra.kumar2@tatasteel.com";
+    }
+    else if(y == "Bokaro"){
+        document.querySelector("#hospital1").innerHTML = " 1. Bokaro General Hospital Blood Bank";
+        document.querySelector("#hospitalLocation1").innerHTML = "Bokaro steel City, Bokaro, Dist. Bokaro";
+        document.querySelector("#email1").innerHTML = "8986872991";
+        document.querySelector("#contact1").innerHTML = "bloodbankbgh@gmail.com";
+        document.querySelector("#hospital2").innerHTML = " 2. Indian Red Cross Society Blood Bank, Bokaro";
+        document.querySelector("#hospitalLocation2").innerHTML = "Near Circuit House, Sector-1, Bokaro, Dist. Bokaro";
+        document.querySelector("#email2").innerHTML = "7903155327";
+        document.querySelector("#contact2").innerHTML = "jh.bb.ircsbksc@gmail.com";
+    }
+    else if(y == "Chatra"){
+        document.querySelector("#hospital1").innerHTML = " 1. Indian Red Corss Soceity Blood Bank, Chatra";
+        document.querySelector("#hospitalLocation1").innerHTML = "Near Post Office, Sadar Hospital Campus Chatra, Chatra, Dist. Chatra";
+        document.querySelector("#email1").innerHTML = "8340524332, 6201636114";
+        document.querySelector("#contact1").innerHTML = "ircschatra@gmail.com";
+        document.querySelector("#hospital2").innerHTML = " 2. Sanjeevani Life Care, Chatra";
+        document.querySelector("#hospitalLocation2").innerHTML = "Khaini Gola Road, Diwankhana Mohalla Chatra, Pin - 825401";
+        document.querySelector("#email2").innerHTML = "7870301101";
+        document.querySelector("#contact2").innerHTML = "sanjeevanylifecarechatra@gmail.com";
+    }
+    else if(y == "Other"){
+        document.querySelector("#hospital1").innerHTML = "No Blood Bank is Available";
+        document.querySelector("#headMainxx").innerHTML = "No Blood Bank is Available";
+        document.querySelector("#hospitalLocation1").innerHTML = "";
+        document.querySelector("#email1").innerHTML = "";
+        document.querySelector("#contact1").innerHTML = "";
+        document.querySelector("#hospital2").innerHTML = "No Blood Bank is Available";
+        document.querySelector("#hospital2").innerHTML = "No Blood Bank is Available";
+        document.querySelector("#hospitalLocation2").innerHTML = "";
+        document.querySelector("#email2").innerHTML = "";
+        document.querySelector("#contact2").innerHTML = "";
+        
+    }
+    document.querySelector(".container_showPopUp").style.display = "block";
+}
+function CloseHPopup(){
+    document.querySelector(".container_showPopUp").style.display = "none";
+}
+  </script>
+    </body>
+</html>

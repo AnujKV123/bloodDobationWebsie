@@ -1,0 +1,93 @@
+{% extends 'App_User/base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block content %}
+ <div class="container py-5">
+      <div class="col-lg-8 m-0 m-auto">
+          <h2 class="border-bottom py-2">Update Profile</h2><br>
+           {%for message in messages %}
+                    {%if "profile_update" in message.tags %}
+                    <div class="alert alert-success alert-dismissible" role="alert">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                      <span aria-hidden="true">×</span>
+                    </button>
+                    <i class="fa fa-check-circle text-light"></i> {{ message }}
+                  </div>
+                    {% endif %}
+                 {% endfor %}
+<form class="row g-3" method="post" enctype="multipart/form-data" action="{% url 'App_Accounts:profileupdate' %}">{% csrf_token %}
+    <div class="col-md-6">
+                {{ form_2.first_name |as_crispy_field }}
+              </div>
+              <div class="col-md-6">
+              {{ form_2.last_name |as_crispy_field }}
+              </div>
+              <div class="col-md-6">
+                {{ form.bloodgroup |as_crispy_field }}
+              </div>
+                <div class="col-md-6">
+                {{ form.type |as_crispy_field }}
+              </div>
+              <div class="col-md-6">
+              {{ form.religion |as_crispy_field }}
+              </div>
+              <div class="col-md-6">
+                {{ form.gender |as_crispy_field }}
+              </div>
+              <div class="col-md-6">
+              {{ form.dob |as_crispy_field }}
+              </div>
+                <div class="col-md-6">
+              {{ form.phone |as_crispy_field }}
+              </div>
+                <div class="col-md-6">
+              {{ form.city |as_crispy_field }}
+              </div>
+                 <div class="col-md-6">
+              {{ form.address |as_crispy_field }}
+              </div>
+               <div class="col-md-6">
+              {{ form.facebook |as_crispy_field }}
+              </div>
+              <div class="col-md-6">
+              {{ form.twitter |as_crispy_field }}
+              </div>
+                <div class="col-md-6">
+              {{ form.instragam |as_crispy_field }}
+              </div>
+                <div class="col-md-6">
+              {{ form.linkedin |as_crispy_field }}
+              </div>
+
+              <div class="col-md-6">
+              {{ form.image }}
+              </div>
+              <div class="col-md-6">
+              <img id="blah" src="{{ request.user.profile.image.url }}" width="100" height="100" alt="your image" />
+              </div>
+               <div class="col-md-12">
+              {{ form.aboutyou|as_crispy_field }}
+              </div>
+              <div class="col-12">
+                <input name="next" type="hidden" value="{{ request.path }}">
+                <button type="submit" class="btn btn-primary"><i class="fa fa-user-edit"></i> Update Profile</button>
+              </div>
+          </form>
+
+      </div>
+  </div>
+    <script>
+    id_photo.onchange = evt => {
+  const [file] = id_photo.files
+  if (file) {
+    blah.src = URL.createObjectURL(file)
+  }
+}
+    $(function () {
+    $("#datetimepicker1").datetimepicker({
+      format: 'DD/MM/YYYY',
+    });
+  });
+    </script>
+
+{% endblock %}
