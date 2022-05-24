@@ -1,0 +1,43 @@
+{% extends 'App_User/base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block content %}
+<nav>
+    <ul>
+        <p>Points <b id="totalPoints">{{fetchProfile.0.points}}</b></p>
+        <p>Total Donation <b>{{fetchProfile.0.totalDonationCount}}</b></p>
+   </ul>
+   </nav>
+<h2>Store</h2>
+<hr>
+<section class="items">
+<div class="item">
+<img src="https://www.sbicard.com/sbi-card-en/assets/media/images/personal/rewards/E-GV/apollo-pharmacy/320x320.jpg" style="width: 300px; height: 200px;">
+<h4>10 Points</h4>
+<button onclick="redeemoffer(10)">Order</button>
+</div>
+<div class="item">
+<img src="https://www.idfcfirstbank.com/content/dam/idfcfirstbank/images/offers/visa-offers/visa-new/pharmeasy.jpg" style="width: 300px; height: 200px;">
+<h4>10 Points</h4>
+<button onclick="redeemoffer(10)">Order</button>
+</div>
+<div  class="item">
+<img src="https://www.cashbackofall.com/upload/01%201mg.jpg" style="width: 300px; height: 200px;">
+<h4>10 Points</h4>
+<button onclick="redeemoffer(10)">Order</button>
+</div>
+<div class="item">
+<img src="https://images.freekaamaal.com/featured_images/11707.jpg" style="width: 300px; height: 200px;">
+<h4>20 Points</h4>
+<button onclick="redeemoffer(20)">Order</button>
+</div>
+<div class="item">
+<img  src="http://srimartservices.in/files/Brands/1_15-04-2019_11-18-25.png" style="width: 300px; height: 200px;">
+<h4>20 Points</h4>
+<button onclick="redeemoffer(20)">Order</button>
+</div>
+</section>
+<script>
+
+</script>
+{% endblock %}

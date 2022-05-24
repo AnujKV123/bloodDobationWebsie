@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+  <title>{% block title %}
+Blood Group
+  {% endblock %}</title>
+  <link href="{% static 'superadmin/vendor/fontawesome-free/css/all.min.css' %}" rel="stylesheet" type="text/css">
+  <link href="{% static 'superadmin/vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet" type="text/css">
+  <link href="{% static 'superadmin/css/ruang-admin.min.css' %}" rel="stylesheet">
+  <link href="{% static 'superadmin/css/style2.css' %}" rel="stylesheet">
+  <link href="{% static 'superadmin/vendor/datatables/dataTables.bootstrap4.min.css' %}" rel="stylesheet">
+    <link href="{% static 'superadmin/vendor/select2/dist/css/select2.min.css' %}" rel="stylesheet" type="text/css">
+<link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
+<style>
+    .sidebar-light .sidebar-brand {
+    color: #fafafa;
+    background-color: #535456;
+}
+.bg-navbar {
+     color: #fafafa;
+    background-color: #535456
+}
+.sidebar {
+     color: #fafafa;
+    background-color:#535456 !important;
+}
+.sidebar-light .sidebar-heading {
+    color: #f0f0f0;
+}
+.sidebar-light .nav-item .nav-link {
+    color: #f0f0f0;
+}
+.sidebar-light .nav-item .nav-link i {
+   color: #f0f0f0;
+}
+</style>
+</head>
+
+<body id="page-top">
+  <div id="wrapper">
+    <!-- Sidebar -->
+    <ul class="navbar-nav sidebar sidebar-light accordion" id="accordionSidebar">
+      <a class="sidebar-brand d-flex align-items-center justify-content-center" href="{% url 'App_Blood:index' %}">
+        <div class="sidebar-brand-icon">
+           BloodLab
+        </div>
+      </a>
+      <hr class="sidebar-divider my-0">
+      <li class="nav-item active">
+        <a class="nav-link" href="{% url 'App_Accounts:dashboard' %}">
+          <i class="fas fa-fw fa-tachometer-alt"></i>
+          <span class="text-light">Dashboard</span></a>
+      </li>
+      <hr class="sidebar-divider">
+      <div class="sidebar-heading">
+        Features
+      </div>
+         {% include 'App_User/user_sidebar_option.html' %}
+
+    </ul>
+    <!-- Sidebar -->
+    <div id="content-wrapper" class="d-flex flex-column">
+      <div id="content">
+        <!-- TopBar -->
+        <nav class="navbar navbar-expand navbar-light bg-navbar topbar mb-4 static-top">
+          <button id="sidebarToggleTop" class="btn btn-link rounded-circle mr-3">
+            <i class="fa fa-bars"></i>
+          </button>
+          <button type="button" class="btn btn-lg btn-danger" onclick="OpenDonationPopup()" id="DonateNow">Donate Now</button>
+            <ul class="navbar-nav ml-auto">
+            <li class="nav-item dropdown no-arrow">
+              <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown"
+                aria-haspopup="true" aria-expanded="false">
+                <span class="ml-2 d-none d-lg-inline text-white small">{{ request.user }}</span>
+              </a>
+              <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
+     
+                <a class="dropdown-item" href="javascript:void(0);" data-toggle="modal" data-target="#logoutModal">
+                  <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
+                  Logout
+                </a>
+              </div>
+            </li>
+          </ul>
+        </nav>
+       {% block content %}
+
+       {% endblock %}
+      </div>
+      <!-- Footer -->
+    </div>
+  </div>
+  <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabelLogout"
+            aria-hidden="true">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="exampleModalLabelLogout">Ohh No!</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                  <p>Are you sure you want to logout?</p>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-outline-primary" data-dismiss="modal">Cancel</button>
+                  <a href="{% url 'App_Accounts:logout' %}" class="btn btn-primary">Logout</a>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- ********************************************************* -->
+  <div class="Container_Donate_Now" id="popup_donate">
+    <div class="overlay" id="overlay1"></div>
+    <div class="modal-content" style="z-index: 2;">
+      <div class="modal-header">
+          
+          <h4 class="modal-title text-danger" id="myModalLabel" style="align:center;">Donor Details</h4>
+          <button class="closePopup" onclick="closePopup()"></button>
+      </div>
+      <div class="modal-body">
+          <div class="row form-group">
+              <form class="col-sm-12" method="post" enctype="multipart/form-data" action="/accounts/dashboard/save_Apportionment/">
+                {% csrf_token %}
+                  <div class="well">
+                  
+            
+            <div class="row">
+                <div class="col-12 col-sm-4"> 
+                       <label for="username" class="control-label">Name<font color="red">*</font></label>
+            <input type="text" name="name" maxlength="50" tabindex="1" value=""  class="form-control" id="txtBbFName" required>
+            <div align="center">
+                                    <div id="enterename" style="display:none;">
+                                        <h4 class="text-danger">Please enter your name</h4>
+                                    </div>
+                                </div>
+            </div>
+          
+            <div class=" col-12 col-sm-4"> 
+            <label for="Gender" class="control-label">Gender<font color="red">*</font></label>
+            <select name="gender" tabindex="1" class="form-control"><option value="-1">Select Value</option>
+                                            
+                                            <option value="F">Female</option>
+  <option value="M">Male</option>
+  <option value="T">Transgender</option></select> 
+                                    <div id="entergender" style="display:none;">
+                                        <h4 class="text-danger">Please enter your gender</h4>
+                                    </div>
+            </div>
+             <div class="col-12 col-sm-4">
+                                <label for="Age" class="control-label">Date of Birth<font color="red">*</font></label> 
+        <input class="form-control hasDatepicker" type="date" name="date_of_birth" tabindex="0" id="datepicker" placeholder="dd-mm-yyyy" required>
+                            <div id="enterdob" style="display:none;">
+                                        <h4 class="text-danger">Please enter your dob</h4>
+                                    </div>
+                            </div>
+            </div>
+  
+         
+          <div class="row">
+                
+                            <div class="col-12 col-sm-4">
+                            <label for="Mobile" class="control-label">Mobile Number<font color="red">*</font></label>
+                             <input type="text" name="mobile_no" maxlength="10" tabindex="1" value=""class="form-control" id="txtBbLName"> 
+                            <div id="entermobile" style="display:none;">
+                                        <h4 class="text-danger">Mobile Number is required</h4>
+                                    </div>
+                                    <div id="dmobileNoTen" style="display: none;">
+                                    <h4 class="text-danger">Mobile Number should be 10 digit</h4>
+                                    </div>
+                                    
+                            
+                            </div>
+                             <div class="col-12 col-sm-4">
+                                <label for="Address" class="control-label">Address</label> 
+             <input type="text" name="address" maxlength="150" tabindex="1" value="" class="form-control" id="txtBbLName" required> 					
+                            </div>
+                            
+                              <div class=" col-12 col-sm-4"> 
+            <label for="password" class="control-label">Apportionment Date</label>
+            <input class="form-control hasDatepicker" type="date" name="apportionment_date" id="datepicker1" tabindex="1" placeholder="dd-mm-yyyy" required>
+          
+            </div>
+                
+           </div>
+           <div class="row">
+             <div class=" col-12 col-sm-4"> 
+            <label for="State" class="control-label">State<font color="red">*</font></label>
+           <select name="state" tabindex="1" onchange="loadAddressDistrictList(this.value)" class="form-control"><option value="-1">Select State</option>
+  <option value="20">Jharkhand</option></select>
+            </div> 
+            <div class=" col-12 col-sm-4"> 
+            <label for="District/City" class="control-label">City<font color="red">*</font></label>
+             <select name="city" id="addressDistList" onchange="loadNewBBList(this.value)" tabindex="1" class="form-control">
+                                    <option value="-1">Select City</option>
+                                    <option value="1">Ranchi</option>
+                                    <option value="2">Dhanbad</option>
+                                    <option value="3">Jamshedpur</option>
+                                    <option value="4">Bokaro</option>
+                                    <option value="5">Chatra</option>
+                                </select>
+            </div>
+          
+             <div class="col-12 col-sm-4">
+                                <label for="Pincode" class="control-label">Blood Bank Name<font color="red">*</font></label> 
+                                   <select tabindex="1" id="bbnamelist" name="blood_bank_name" class="form-control">
+                                    <option value="-1">Select Blood Bank</option>
+                                    <option value="-1">Apollo Hospital Group</option>
+                                    <option value="-1">Archi Jharkhand Blood Bank</option>
+                                    <option value="-1">Jalan Memorial Hospital</option>
+                                    <option value="-1">Patliputra Medical Collage & Hospital</option>
+                                    <option value="-1">TATA Steel Hospital</option>
+                                    <option value="-1">TISCO Hospital, Noamundi</option>
+                                    <option value="-1">Bokaro General Hospital</option>
+                                    <option value="-1">Indian Red Cross Society, Bokaro</option>
+                                    <option value="-1">Indian Red Corss Soceity, Chatra</option>
+                                    <option value="-1">Sanjeevani Life Care</option>
+                                </select>
+                            <div id="enterbloodbankname" style="display:none;">
+                                        <h4 class="text-danger">Please enter your blood bank name</h4>
+                                    </div>	 
+  
+                            </div>
+           </div>
+              <div class="row">
+                <div class="col-12 col-sm-4"> 
+                       <label for="username" class="control-label">Blood Group</label>
+                         <select tabindex="1" name="blood_group" class="form-control">
+                                    <option value="-1">Select Blood Group </option>
+                                      <option value="1">A+Ve</option>
+                                      <option value="2">A-Ve</option>
+                                      <option value="3">B+Ve</option>
+                                      <option value="4">B-Ve</option>
+                                      <option value="5">AB+Ve</option>
+                                      <option value="6">AB-Ve</option>
+                                      <option value="7">O+Ve</option>
+                                      <option value="8">O-Ve</option>
+                          </select>
+  </div>
+  <!-- <div class=" col-12 col-sm-4"> 
+            <label for="Gender" class="control-label">GoI ID</label>
+          <select tabindex="1" name="g_id" onchange="goiddiv()" class="form-control">
+                                <option value="-1">Select Value</option>
+                                         
+                                          <option value="7#18#3">Aadhar Number</option>
+  <option value="4#18#2">Driving License</option>
+  <option value="5#18#2">Govt Authority Identifier</option>
+  <option value="1#10#2">PAN  </option>
+  <option value="2#8#2">Passport Number</option>
+  <option value="3#18#2">Voter Id</option>
+                                </select>
+            </div> -->
+            <div class=" col-12 col-sm-4" id="goinumber" style="display: none;"> 
+            <label for="password" class="control-label">GoI ID Number</label>
+            <input type="text" name="goinumber" class="form-control" tabindex="1" maxlength="20" placeholder="GoI ID Number">
+                <div id="entergoi" style="display:none;">
+                                        <h4 class="text-danger">Please enter your GOI ID number</h4>
+                                    </div>
+            </div>
+            </div>
+            
+      <br>
+               <div class="row">
+               <div class="col-12 col-sm-4">
+               </div>
+               <div class="col-12 col-sm-4">
+               <button type="submit" tabindex="1" onclick="signup()" class="btn btn-primary btn-block btn-danger">Save</button>
+               </div>
+               <div class="col-12 col-sm-4"> 
+               </div>
+               </div>
+  
+                  </div>
+              </form>
+                      </div>
+                 
+      </div>
+  </div>
+  </div>
+  <!-- Scroll to top -->
+  <a class="scroll-to-top rounded" href="#page-top">
+    <i class="fas fa-angle-up"></i>
+  </a>
+
+  <script src="{% static 'superadmin/vendor/jquery/jquery.min.js' %}"></script>
+  <script src="{% static 'superadmin/vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+  <script src="{% static 'superadmin/vendor/jquery-easing/jquery.easing.min.js' %}"></script>
+  <script src="{% static 'superadmin/js/ruang-admin.min.js' %}"></script>
+
+  <script src="{% static 'superadmin/vendor/datatables/jquery.dataTables.min.js' %}"></script>
+  <script src="{% static 'superadmin/vendor/datatables/dataTables.bootstrap4.min.js' %}"></script>
+    <script src="{% static 'superadmin/vendor/select2/dist/js/select2.min.js' %}"></script>
+  <!-- Page level custom scripts -->
+  <script>
+    $(document).ready(function () {
+      $('#dataTableHover').DataTable(); // ID From dataTable with Hover
+    });
+    $(document).ready(function () {
+      $('#dataTableHover1').DataTable(); // ID From dataTable with Hover
+    });
+  </script>
+<script>
+    $(document).ready(function () {
+
+
+      $('.select2-single').select2();
+
+      // Select2 Single  with Placeholder
+      $('.select2-single-placeholder').select2({
+        placeholder: "Select a Province",
+        allowClear: true
+      });
+
+      // Select2 Multiple
+      $('.select2-multiple').select2();
+
+    });
+
+    function getCookie(name) {
+  let cookieValue = null;
+  if (document.cookie && document.cookie !== '') {
+      const cookies = document.cookie.split(';');
+      for (let i = 0; i < cookies.length; i++) {
+          const cookie = cookies[i].trim();
+          // Does this cookie string begin with the name we want?
+          if (cookie.substring(0, name.length + 1) === (name + '=')) {
+              cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+              break;
+          }
+      }
+  }
+  return cookieValue;
+}
+
+const csrftoken = getCookie('csrftoken');
+
+    function redeemoffer(a){
+      var pointxx = document.getElementById("totalPoints").innerHTML
+      console.log(pointxx)
+      if(pointxx < 10){
+        alert("you have not enough points to redeem this gift voucher")
+      }
+      else{
+        let text = " Enter OK to proceed Now! "
+        if(confirm(text) == true){
+          const y = a
+          console.log(y)
+          fetch("http://127.0.0.1:8000/accounts/updatePoints/", {
+          // Adding method type
+          method: "POST",
+          
+          // Adding body or contents to send
+          body: JSON.stringify({
+            "points": y,
+          }),
+          
+          // Adding headers to the request
+          headers: {
+            "Content-type": "application/json",
+            'Accept': 'application/json',
+            "X-CSRFToken":csrftoken
+          }
+        }).then(response =>{
+          response.json()
+          alert("your order placed sucessfully !")
+          if(response.status == "400"){
+          }
+        })
+        // Converting to JSON
+        // Displaying results to console
+        .then(data => {
+
+        });
+        }
+      }
+    }
+  </script>
+</body>
+
+</html>

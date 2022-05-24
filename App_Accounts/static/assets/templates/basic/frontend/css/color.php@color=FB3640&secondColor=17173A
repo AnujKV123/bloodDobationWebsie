@@ -1,0 +1,28 @@
+
+
+.btn--base, .btn--base:hover, body::-webkit-scrollbar-thumb, .scroll-to-top, .about-thumb .play-btn, .donor-card, .work-item__icon .step, .blog-post__meta .tag, .footer-widget__title::after, .subscribe-form button, .contact-wrapper-content > .title::after, .preloader div:before {
+    background-color: #FB3640;
+}
+
+.custom--accordion-two .accordion-button:not(.collapsed), .header .site-logo.site-title, .hero__blood-search-form .input-field i, .avaiable-blood-single::after, .avaiable-blood-single__name, .about-item__icon, .work-item__icon i, .tags .single-tag, .sidebar-category__single a:hover, .sidebar-category .more, .footer .footer-contact-list li .icon i, .footer-links-list li a:hover, .single-info__content a:hover, .overview-item__icon,.header .main-menu li a:hover, .header .main-menu li a:focus, .page-breadcrumb li:first-child::before{
+    color: #FB3640;
+}
+
+.text--base{
+    color:  #FB3640 !important;
+}
+.caption-list-two {
+    background-color: #FB36401a;
+}
+.bg--base {
+    background-color: #FB3640 !important;
+}
+
+
+.custom--table thead, .header, .header.menu-fixed .header__bottom, .language-select option, .inner-hero::after, .avaiable-blood-single, .about-item__icon, .donor-card::before, .work-item__icon, .testimonial-card, .sidebar-widget__header, .contact-form .select option, .section--bg2, .preloader-holder, .blood-donor-info-area{
+    background-color: #17173A;
+}
+
+.blood-donor-info-area {
+    box-shadow: 0 5px 15px #17173A4f;
+}

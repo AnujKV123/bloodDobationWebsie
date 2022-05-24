@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+  <title>{% block title %}
+BD Global News
+  {% endblock %}</title>
+  <link href="{% static 'superadmin/vendor/fontawesome-free/css/all.min.css' %}" rel="stylesheet" type="text/css">
+  <link href="{% static 'superadmin/vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet" type="text/css">
+  <link href="{% static 'superadmin/css/ruang-admin.min.css' %}" rel="stylesheet">
+  <link href="{% static 'superadmin/vendor/datatables/dataTables.bootstrap4.min.css' %}" rel="stylesheet">
+    <link href="{% static 'superadmin/vendor/select2/dist/css/select2.min.css' %}" rel="stylesheet" type="text/css">
+<link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
+<style>
+    .sidebar-light .sidebar-brand {
+    color: #fafafa;
+    background-color: #535456;
+}
+.bg-navbar {
+     color: #fafafa;
+    background-color: #535456
+}
+.sidebar {
+     color: #fafafa;
+    background-color:#535456 !important;
+}
+.sidebar-light .sidebar-heading {
+    color: #f0f0f0;
+}
+.sidebar-light .nav-item .nav-link {
+    color: #f0f0f0;
+}
+.sidebar-light .nav-item .nav-link i {
+   color: #f0f0f0;
+}
+</style>
+</head>
+
+<body id="page-top">
+  <div id="wrapper">
+    <!-- Sidebar -->
+    <ul class="navbar-nav sidebar sidebar-light accordion" id="accordionSidebar">
+      <a class="sidebar-brand d-flex align-items-center justify-content-center" href="{% url 'App_News:index' %}">
+        <div class="sidebar-brand-icon">
+            BD GOBAL NEWS
+        </div>
+      </a>
+      <hr class="sidebar-divider my-0">
+      <li class="nav-item active">
+        <a class="nav-link" href="{% url 'App_Admin:dashboard' %}">
+          <i class="fas fa-fw fa-tachometer-alt"></i>
+          <span class="text-light">Dashboard</span></a>
+      </li>
+      <hr class="sidebar-divider">
+      <div class="sidebar-heading">
+        Features
+      </div>
+         {% include 'App_Admin/admin_sidebar_option.html' %}
+
+    </ul>
+    <!-- Sidebar -->
+    <div id="content-wrapper" class="d-flex flex-column">
+      <div id="content">
+        <!-- TopBar -->
+        <nav class="navbar navbar-expand navbar-light bg-navbar topbar mb-4 static-top">
+          <button id="sidebarToggleTop" class="btn btn-link rounded-circle mr-3">
+            <i class="fa fa-bars"></i>
+          </button>
+            <ul class="navbar-nav ml-auto">
+            <li class="nav-item dropdown no-arrow">
+              <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown"
+                aria-haspopup="true" aria-expanded="false">
+                <span class="ml-2 d-none d-lg-inline text-white small">{{ request.user }}</span>
+              </a>
+              <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
+     
+                <a class="dropdown-item" href="javascript:void(0);" data-toggle="modal" data-target="#logoutModal">
+                  <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
+                  Logout
+                </a>
+              </div>
+            </li>
+          </ul>
+        </nav>
+       {% block content %}
+
+       {% endblock %}
+      </div>
+      <!-- Footer -->
+    </div>
+  </div>
+  <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabelLogout"
+            aria-hidden="true">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="exampleModalLabelLogout">Ohh No!</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                  <p>Are you sure you want to logout?</p>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-outline-primary" data-dismiss="modal">Cancel</button>
+                  <a href="{% url 'App_Admin:superadmin_logout' %}" class="btn btn-primary">Logout</a>
+                </div>
+              </div>
+            </div>
+          </div>
+  <!-- Scroll to top -->
+  <a class="scroll-to-top rounded" href="#page-top">
+    <i class="fas fa-angle-up"></i>
+  </a>
+
+  <script src="{% static 'superadmin/vendor/jquery/jquery.min.js' %}"></script>
+  <script src="{% static 'superadmin/vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+  <script src="{% static 'superadmin/vendor/jquery-easing/jquery.easing.min.js' %}"></script>
+  <script src="{% static 'superadmin/js/ruang-admin.min.js' %}"></script>
+
+  <script src="{% static 'superadmin/vendor/datatables/jquery.dataTables.min.js' %}"></script>
+  <script src="{% static 'superadmin/vendor/datatables/dataTables.bootstrap4.min.js' %}"></script>
+    <script src="{% static 'superadmin/vendor/select2/dist/js/select2.min.js' %}"></script>
+  <!-- Page level custom scripts -->
+  <script>
+    $(document).ready(function () {
+      $('#dataTableHover').DataTable(); // ID From dataTable with Hover
+    });
+    $(document).ready(function () {
+      $('#dataTableHover1').DataTable(); // ID From dataTable with Hover
+    });
+  </script>
+<script>
+    $(document).ready(function () {
+
+
+      $('.select2-single').select2();
+
+      // Select2 Single  with Placeholder
+      $('.select2-single-placeholder').select2({
+        placeholder: "Select a Province",
+        allowClear: true
+      });
+
+      // Select2 Multiple
+      $('.select2-multiple').select2();
+
+    });
+  </script>
+</body>
+
+</html>

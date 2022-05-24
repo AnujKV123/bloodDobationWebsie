@@ -1,0 +1,232 @@
+{% extends 'App_User/base.html' %}
+{% load static %}
+{% block content %}
+{%for message in messages %}
+<div class="alert alert-success alert-dismissible bg-danger" role="alert">
+<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+  <span aria-hidden="true">×</span>
+</button>
+<i class="fa fa-check-circle text-light"></i> {{ message }}
+</div>
+{% endfor %}
+ <div class="container py-5">
+    <div class="row">
+      <div class="col-lg-5">
+        <div class="card mb-4">
+          <div class="card-body text-center">
+            <img src="{{ request.user.profile.image.url }}" alt="avatar" class="rounded-circle img-fluid" style="width: 150px;">
+            <h5 class="my-3">{{ request.user }}</h5>
+            <h4 class="badge-success" style="padding: 4px 15px 9px;border-radius: 10px;">{{ request.user.profile.type }}</h4>
+            <div class="d-flex justify-content-center mb-2">
+             <p class="text-justify">{{ request.user.profile.aboutyou }}</p>
+            </div>
+          </div>
+        </div>
+        <div class="card mb-4 mb-lg-0">
+          <div class="card-body p-0">
+            <ul class="list-group list-group-flush rounded-3">
+              <li class="list-group-item d-flex justify-content-between align-items-center p-3">
+                <i class="fab fa-linkedin fa-lg" style="color: #333333;"></i>
+                 {%if  request.user.profile.linkedin != "" %}
+                <p class="mb-0">{{ request.user.profile.linkedin }}</p>
+                 {% else %}
+                  <p class="mb-0">Null</p>
+                {% endif %}
+              </li>
+              <li class="list-group-item d-flex justify-content-between align-items-center p-3">
+                <i class="fab fa-twitter fa-lg" style="color: #55acee;"></i>
+                  {%if   request.user.profile.twitter  != "" %}
+                <p class="mb-0">{{  request.user.profile.twitter  }}</p>
+                 {% else %}
+                  <p class="mb-0">Null</p>
+                {% endif %}
+              </li>
+              <li class="list-group-item d-flex justify-content-between align-items-center p-3">
+                <i class="fab fa-instagram fa-lg" style="color: #ac2bac;"></i>
+                  {%if   request.user.profile.instragam   != "" %}
+                <p class="mb-0">{{  request.user.profile.instragam   }}</p>
+                 {% else %}
+                  <p class="mb-0">Null</p>
+                {% endif %}
+              </li>
+              <li class="list-group-item d-flex justify-content-between align-items-center p-3">
+                <i class="fab fa-facebook-f fa-lg" style="color: #3b5998;"></i>
+                  {%if   request.user.profile.facebook   != "" %}
+                <p class="mb-0">{{  request.user.profile.facebook  }}</p>
+                 {% else %}
+                  <p class="mb-0">Null</p>
+                {% endif %}
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-7">
+        <div class="card mb-4">
+          <div class="card-body">
+            <div class="row">
+              <div class="col-sm-3">
+                <p class="mb-0">First Name</p>
+              </div>
+              <div class="col-sm-9">
+                  {% if  request.user.first_name != "" %}
+                <p class="text-muted mb-0">{{ request.user.first_name }}
+                  {% else %}
+                <p class="text-muted mb-0">Null</p>
+                  {% endif %}
+              </div>
+            </div>
+            <hr>
+            <div class="row">
+              <div class="col-sm-3">
+                <p class="mb-0">Last Name</p>
+              </div>
+              <div class="col-sm-9">
+                  {% if  request.user.last_name != "" %}
+                <p class="text-muted mb-0">{{ request.user.last_name }}
+                  {% else %}
+                <p class="text-muted mb-0">Null</p>
+                  {% endif %}
+              </div>
+            </div>
+            <hr>
+            <div class="row">
+              <div class="col-sm-3">
+                <p class="mb-0">Email</p>
+              </div>
+              <div class="col-sm-9">
+                 {% if  request.user.email != "" %}
+                <p class="text-muted mb-0">{{ request.user.email }}
+                  {% else %}
+                <p class="text-muted mb-0">Null</p>
+                  {% endif %}
+              </div>
+            </div>
+            <hr>
+            <div class="row">
+              <div class="col-sm-3">
+                <p class="mb-0">Phone</p>
+              </div>
+              <div class="col-sm-9">
+                 {% if  request.user.profile.phone != "" %}
+                <p class="text-muted mb-0">{{ request.user.profile.phone  }}
+                  {% else %}
+                <p class="text-muted mb-0">Null</p>
+                  {% endif %}
+              </div>
+            </div>
+            <hr>
+            <div class="row">
+              <div class="col-sm-3">
+                <p class="mb-0">City</p>
+              </div>
+              <div class="col-sm-9">
+                {% if  request.user.profile.city != "" %}
+                <p class="text-muted mb-0">{{ request.user.profile.city  }}
+                  {% else %}
+                <p class="text-muted mb-0">Null</p>
+                  {% endif %}
+              </div>
+            </div>
+            <hr>
+             <div class="row">
+              <div class="col-sm-3">
+                <p class="mb-0">Address</p>
+              </div>
+              <div class="col-sm-9">
+                {% if  request.user.profile.address != "" %}
+                <p class="text-muted mb-0">{{ request.user.profile.address  }}
+                  {% else %}
+                <p class="text-muted mb-0">Null</p>
+                  {% endif %}
+              </div>
+            </div>
+            <hr>
+            <div class="row">
+              <div class="col-sm-3">
+                <p class="mb-0">Gender</p>
+              </div>
+              <div class="col-sm-9">
+                   {% if  request.user.profile.gender != "" %}
+                <p class="text-muted mb-0">{{ request.user.profile.gender  }}
+                  {% else %}
+                <p class="text-muted mb-0">Null</p>
+                  {% endif %}
+              </div>
+            </div>
+              <hr>
+            <div class="row">
+              <div class="col-sm-3">
+                <p class="mb-0">Blood Group</p>
+              </div>
+              <div class="col-sm-9">
+                   {% if  request.user.profile.bloodgroup != "" %}
+                <p class="text-muted mb-0">{{ request.user.profile.bloodgroup  }}
+                  {% else %}
+                <p class="text-muted mb-0">Null</p>
+                  {% endif %}
+              </div>
+            </div>
+               <hr>
+              <div class="row">
+              <div class="col-sm-3">
+                <p class="mb-0">Religious</p>
+              </div>
+              <div class="col-sm-9">
+                   {% if  request.user.profile.religion != "" %}
+                <p class="text-muted mb-0">{{ request.user.profile.religion  }}
+                  {% else %}
+                <p class="text-muted mb-0">Null</p>
+                  {% endif %}
+              </div>
+            </div>
+              <hr>
+              <div class="row">
+              <div class="col-sm-3">
+                <p class="mb-0">Total Donate</p>
+              </div>
+              <div class="col-sm-9">
+                   {% if  request.user.profile.totaldonate != "" %}
+                <p class="text-muted mb-0">{{ request.user.profile.totaldonate  }}
+                  {% else %}
+                <p class="text-muted mb-0">Null</p>
+                  {% endif %}
+              </div>
+            </div>
+              <hr>
+              <div class="row">
+              <div class="col-sm-3">
+                <p class="mb-0">Date Of Birth</p>
+              </div>
+              <div class="col-sm-9">
+                   {% if  request.user.profile.dob != "" %}
+                <p class="text-muted mb-0">{{ request.user.profile.dob  }}
+                  {% else %}
+                <p class="text-muted mb-0">Null</p>
+                  {% endif %}
+              </div>
+            </div>
+              <hr>
+              <div class="row">
+              <div class="col-sm-3">
+                <p class="mb-0">Last Donate</p>
+              </div>
+              <div class="col-sm-9">
+                   {% if  request.user.profile.lastdonate != "" %}
+                <p class="text-muted mb-0">{{ request.user.profile.lastdonate  }}
+                  {% else %}
+                <p class="text-muted mb-0">Null</p>
+                  {% endif %}
+              </div>
+            </div>
+
+          </div>
+        </div>
+            <div class="col-lg-12 mx-0">
+                <a href="{% url 'App_Accounts:profileupdate' %}" class="btn btn-warning"><i class="fa fa-user-edit"></i> Update Profile</a>
+            </div>
+      </div>
+    </div>
+  </div>
+
+{% endblock %}

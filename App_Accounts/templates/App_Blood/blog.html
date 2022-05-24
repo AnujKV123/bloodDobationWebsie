@@ -1,0 +1,93 @@
+{% extends 'App_Blood/base.html' %}
+{% load static %}
+{% block content %}
+<div class="main-wrapper">
+<section class="inner-hero bg_img overlay--one" style="background-image: url('{% static 'assets/images/frontend/breadcrumb/61023f89990b81627537289.jpg' %}');">
+<div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-6 text-center">
+                <h2 class="page-title text-white">Blog</h2>
+                <ul class="page-breadcrumb justify-content-center">
+                    <li><a href="">Home</a></li>
+                    <li>Blog</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
+<section class="pt-100 pb-100">
+<div class="container">
+   <div class="row">
+            <div class="col-xl-2 col-lg-3 col-md-2 d-md-block d-none">
+               <a  target="_blank" href="https://script.viserlab.com/bloodlab/add/" class="d-block bonus">
+                   <img src="{% static 'assets/images/advertisement/6107f71a3be0e1627911962.png' %}" alt="image">
+               </a>
+                <a  target="_blank" href="" class="d-block bonus">
+                    <img src="{% static 'assets/images/advertisement/6107f739b69161627911993.png' %}" alt="image">
+                </a>
+                <a  target="_blank" href="" class="d-block bonus">
+                    <img src="{% static 'assets/images/advertisement/6107f739b69161627911993.png' %}" alt="image">
+                </a>
+            </div>
+            <div class="col-xl-10 col-lg-9 col-md-10">
+                <div class="row gy-4 justify-content-center">
+                     {% for post in all_blog %}
+                     <div class="col-lg-4 col-md-6">
+                            <div class="blog-post">
+                                <div class="blog-post__thumb">
+                                    <a href="{% url 'App_Blood:blog_details' post.id %}" class="d-block">
+                                        <img src="{{ post.thumbnail.url }}" alt="image1">
+                                    </a>
+                                </div>
+                                <div class="blog-post__content">
+                                    <ul class="blog-post__meta">
+                                        <li>{{ post.post_on|date }}</li>
+                                    </ul>
+                                    <h5 class="blog-post__title mt-3">
+                                        <a href="{% url 'App_Blood:blog_details' post.id %}">{{ post.title }}</a>
+                                    </h5>
+                                    <p style="text-align: justify;">
+                                        {{ post.short_description|slice:":120" }}......
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                     {% endfor %}
+                 </div>
+                <div class="my-4">
+                 {% if all_blog.has_other_pages %}
+                    <nav aria-label="Page navigation example">
+                      <ul class="pagination">
+                        {% if all_blog.has_previous %}
+                        <li class="page-item">
+                          <a class="page-link" href="?page={{ all_blog.previous_page_number }}" aria-label="Previous">
+                            <span aria-hidden="true">&laquo;</span>
+                          </a>
+                        </li>
+                         {% endif %}
+                        {% for i in all_blog.paginator.page_range %}
+                        {% if all_blog.number == i %}
+                         <li class="page-item"><a class="page-link bg-success text-light">{{ i }}</a></li>
+                        {% else %}
+                         <li class="page-item"><a class="page-link" href="?page={{ i }}">{{ i }}</a></li>
+                        {% endif %}
+                        {% endfor %}
+                         {% if all_blog.has_next %}
+                        <li class="page-item">
+                          <a class="page-link" href="?page={{ all_blog.next_page_number }}" aria-label="Next">
+                            <span aria-hidden="true">&raquo;</span>
+                          </a>
+                        </li>
+                        {% endif %}
+                      </ul>
+                    </nav>
+                {% endif %}
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+        </div>
+{% endblock %}

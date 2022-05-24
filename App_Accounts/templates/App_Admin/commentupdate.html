@@ -1,0 +1,32 @@
+{% extends 'App_Admin/base.html' %}
+{% load crispy_forms_tags %}
+{% block content %}
+<div class="col-lg-10 p-2  m-0 m-auto">
+    {%for message in messages %}
+        {%if "comment_update" in message.tags %}
+            <div class="alert alert-success alert-dismissible" role="alert">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+                {{ message }}
+            </div>
+        {% endif %}
+    {% endfor %}
+</div>
+<div class="container">
+          <div class="row g-3">
+          <div class="col-lg-10 m-0 m-auto">
+              <div class="card p-4 mb-4">
+              <h2>Update comment</h2>
+              <form method="post" action="">{% csrf_token %}
+                  {{ form|crispy }}
+
+                  <input type="hidden" name="next" value="{{ request.path }}">
+                  <button type="submit" class="btn btn-primary"><i class="fa fa-edit"></i> Update</button>
+              </form>
+                </div>
+          </div>
+          </div>
+
+</div>
+{% endblock %}

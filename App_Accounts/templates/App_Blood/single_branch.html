@@ -1,0 +1,257 @@
+{% extends 'App_Blood/base.html' %}
+{% load static %}
+{% block content %}
+<style>
+.carousel-dark .carousel-indicators [data-bs-target] {
+    background-color: #b10d0d;
+}
+.carousel-indicators [data-bs-target]{
+    margin-top: 3px;
+    border-radius: 50%;
+    width: 18px;
+    height: 18px;
+}
+.img-fluid {
+    max-width: 100%;
+    height: 100%;
+}
+</style>
+<section class="">
+     <div class="col-lg-12">
+            <div id="carouselExampleDark" class="carousel carousel-dark slide" data-bs-ride="carousel">
+              <div class="carousel-indicators mb-2">
+                <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+                   {% for c in slider_img|slice:"1:"%}
+                   <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="{{forloop.counter}}" aria-label="Slide 3"></button>
+                {% endfor %}
+
+              </div>
+              <div class="carousel-inner">
+                {% for c in slider_img|slice:":1" %}
+                <div class="carousel-item active" data-bs-interval="10000">
+                  <img src="{{ c.photo.url }}" class="d-block w-100" alt="...">
+                  <div class="carousel-caption d-none d-md-block">
+                    <h5>{{ c.title }}</h5>
+                    <p>{{ c.sub_title }}</p>
+                  </div>
+                </div>
+                 {% endfor %}
+                {% for c in slider_img|slice:"1:" %}
+                <div class="carousel-item" data-bs-interval="2000">
+                  <img src="{{ c.photo.url }}" class="d-block w-100" alt="...">
+                  <div class="carousel-caption d-none d-md-block">
+                    <h5>{{ c.title }}</h5>
+                    <p>{{ c.sub_title }}</p>
+                  </div>
+                </div>
+                {% endfor %}
+              </div>
+              <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleDark" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+              </button>
+              <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleDark" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+              </button>
+            </div>
+        </div>
+    <div class="container mt-4">
+
+        <div class="card mb-3 w-100">
+            <div class="row g-0">
+    <div class="col-md-4">
+      <img src="{{ branch.president_image.url }}" class="img-fluid rounded-start" alt="...">
+    </div>
+    <div class="col-md-8">
+      <div class="card-body">
+        <h5 class="card-title">President Message</h5>
+        <p class="card-text">
+             {{ branch.president_message }}
+        </p>
+      </div>
+    </div>
+  </div>
+        </div>
+        <div class="card mb-3 w-100">
+            <div class="row g-0">
+    <div class="col-md-4">
+      <img src="{{ branch.vicepresident_image.url }}" class="img-fluid rounded-start" alt="...">
+    </div>
+    <div class="col-md-8">
+      <div class="card-body">
+        <h5 class="card-title">Vice President Message</h5>
+        <p class="card-text">
+             {{ branch.vicepresident_message }}
+        </p>
+      </div>
+    </div>
+  </div>
+        </div>
+    </div>
+</section>
+<section class="pt-100 pb-100 border-top  position-relative z-index-2 overflow-hidden">
+    <div class="bottom-el-bg">
+        <img src="/static/assets/images/frontend/donor/60fff8a0c56951627388064.png" alt="image">
+    </div>
+
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-6">
+                <div class="section-header text-center">
+                    <h2 class="section-title">Top Donors</h2>
+                    <p class="mt-2">Dolor sit amet, consectetur adipisicing elit. Dignissimos soluta est qui totam expedita eaque, deleniti quidem sequi magni iure nulla corporis.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="row justify-content-center gy-4">
+            <div class="col-lg-3 col-md-4 col-sm-6 col-xs-6">
+                    <div class="donor-card style--two has--link section--bg2">
+                        <a href="" class="item--link"></a>
+                        <div class="donor-card__thumb">
+                            <img src="/static/assets/images/donor/6108d83ae02901627969594.jpg" alt="image">
+                        </div>
+                        <div class="donor-card__content">
+                            <h6 class="donor-card__name">Md Hasan</h6>
+                            <p class="fs--14px text-white">Blood Group : <span class="text--base">(AB+)</span></p>
+                            <ul class="d-flex flex-wrap align-items-center justify-content-center donor-card__social mt-1">
+                                <li><a href="" target="_blank"><i class="lab la-facebook-f"></i></a></li>
+                                <li><a href="" target="_blank"><i class="lab la-twitter"></i></a></li>
+                                <li><a href="" target="_blank"><i class="lab la-linkedin-in"></i></a></li>
+                                <li><a href="" target="_blank"><i class="lab la-instagram"></i></a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            <div class="col-lg-3 col-md-4 col-sm-6 col-xs-6">
+                    <div class="donor-card style--two has--link section--bg2">
+                        <a href="" class="item--link"></a>
+                        <div class="donor-card__thumb">
+                            <img src="/static/assets/images/donor/6108d83ae02901627969594.jpg" alt="image">
+                        </div>
+                        <div class="donor-card__content">
+                            <h6 class="donor-card__name">Md Hasan</h6>
+                            <p class="fs--14px text-white">Blood Group : <span class="text--base">(AB+)</span></p>
+                            <ul class="d-flex flex-wrap align-items-center justify-content-center donor-card__social mt-1">
+                                <li><a href="" target="_blank"><i class="lab la-facebook-f"></i></a></li>
+                                <li><a href="" target="_blank"><i class="lab la-twitter"></i></a></li>
+                                <li><a href="" target="_blank"><i class="lab la-linkedin-in"></i></a></li>
+                                <li><a href="" target="_blank"><i class="lab la-instagram"></i></a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            <div class="col-lg-3 col-md-4 col-sm-6 col-xs-6">
+                    <div class="donor-card style--two has--link section--bg2">
+                        <a href="" class="item--link"></a>
+                        <div class="donor-card__thumb">
+                            <img src="/static/assets/images/donor/6108d83ae02901627969594.jpg" alt="image">
+                        </div>
+                        <div class="donor-card__content">
+                            <h6 class="donor-card__name">Md Hasan</h6>
+                            <p class="fs--14px text-white">Blood Group : <span class="text--base">(AB+)</span></p>
+                            <ul class="d-flex flex-wrap align-items-center justify-content-center donor-card__social mt-1">
+                                <li><a href="" target="_blank"><i class="lab la-facebook-f"></i></a></li>
+                                <li><a href="" target="_blank"><i class="lab la-twitter"></i></a></li>
+                                <li><a href="" target="_blank"><i class="lab la-linkedin-in"></i></a></li>
+                                <li><a href="" target="_blank"><i class="lab la-instagram"></i></a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            <div class="col-lg-3 col-md-4 col-sm-6 col-xs-6">
+                    <div class="donor-card style--two has--link section--bg2">
+                        <a href="" class="item--link"></a>
+                        <div class="donor-card__thumb">
+                            <img src="/static/assets/images/donor/6108d83ae02901627969594.jpg" alt="image">
+                        </div>
+                        <div class="donor-card__content">
+                            <h6 class="donor-card__name">Md Hasan</h6>
+                            <p class="fs--14px text-white">Blood Group : <span class="text--base">(AB+)</span></p>
+                            <ul class="d-flex flex-wrap align-items-center justify-content-center donor-card__social mt-1">
+                                <li><a href="" target="_blank"><i class="lab la-facebook-f"></i></a></li>
+                                <li><a href="" target="_blank"><i class="lab la-twitter"></i></a></li>
+                                <li><a href="" target="_blank"><i class="lab la-linkedin-in"></i></a></li>
+                                <li><a href="" target="_blank"><i class="lab la-instagram"></i></a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            <div class="col-lg-3 col-md-4 col-sm-6 col-xs-6">
+                    <div class="donor-card style--two has--link section--bg2">
+                        <a href="" class="item--link"></a>
+                        <div class="donor-card__thumb">
+                            <img src="/static/assets/images/donor/6108d83ae02901627969594.jpg" alt="image">
+                        </div>
+                        <div class="donor-card__content">
+                            <h6 class="donor-card__name">Md Hasan</h6>
+                            <p class="fs--14px text-white">Blood Group : <span class="text--base">(AB+)</span></p>
+                            <ul class="d-flex flex-wrap align-items-center justify-content-center donor-card__social mt-1">
+                                <li><a href="" target="_blank"><i class="lab la-facebook-f"></i></a></li>
+                                <li><a href="" target="_blank"><i class="lab la-twitter"></i></a></li>
+                                <li><a href="" target="_blank"><i class="lab la-linkedin-in"></i></a></li>
+                                <li><a href="" target="_blank"><i class="lab la-instagram"></i></a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            <div class="col-lg-3 col-md-4 col-sm-6 col-xs-6">
+                    <div class="donor-card style--two has--link section--bg2">
+                        <a href="" class="item--link"></a>
+                        <div class="donor-card__thumb">
+                            <img src="/static/assets/images/donor/6108d83ae02901627969594.jpg" alt="image">
+                        </div>
+                        <div class="donor-card__content">
+                            <h6 class="donor-card__name">Md Hasan</h6>
+                            <p class="fs--14px text-white">Blood Group : <span class="text--base">(AB+)</span></p>
+                            <ul class="d-flex flex-wrap align-items-center justify-content-center donor-card__social mt-1">
+                                <li><a href="" target="_blank"><i class="lab la-facebook-f"></i></a></li>
+                                <li><a href="" target="_blank"><i class="lab la-twitter"></i></a></li>
+                                <li><a href="" target="_blank"><i class="lab la-linkedin-in"></i></a></li>
+                                <li><a href="" target="_blank"><i class="lab la-instagram"></i></a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            <div class="col-lg-3 col-md-4 col-sm-6 col-xs-6">
+                    <div class="donor-card style--two has--link section--bg2">
+                        <a href="" class="item--link"></a>
+                        <div class="donor-card__thumb">
+                            <img src="/static/assets/images/donor/6108d83ae02901627969594.jpg" alt="image">
+                        </div>
+                        <div class="donor-card__content">
+                            <h6 class="donor-card__name">Md Hasan</h6>
+                            <p class="fs--14px text-white">Blood Group : <span class="text--base">(AB+)</span></p>
+                            <ul class="d-flex flex-wrap align-items-center justify-content-center donor-card__social mt-1">
+                                <li><a href="" target="_blank"><i class="lab la-facebook-f"></i></a></li>
+                                <li><a href="" target="_blank"><i class="lab la-twitter"></i></a></li>
+                                <li><a href="" target="_blank"><i class="lab la-linkedin-in"></i></a></li>
+                                <li><a href="" target="_blank"><i class="lab la-instagram"></i></a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            <div class="col-lg-3 col-md-4 col-sm-6 col-xs-6">
+                    <div class="donor-card style--two has--link section--bg2">
+                        <a href="" class="item--link"></a>
+                        <div class="donor-card__thumb">
+                            <img src="/static/assets/images/donor/6108d83ae02901627969594.jpg" alt="image">
+                        </div>
+                        <div class="donor-card__content">
+                            <h6 class="donor-card__name">Md Hasan</h6>
+                            <p class="fs--14px text-white">Blood Group : <span class="text--base">(AB+)</span></p>
+                            <ul class="d-flex flex-wrap align-items-center justify-content-center donor-card__social mt-1">
+                                <li><a href="" target="_blank"><i class="lab la-facebook-f"></i></a></li>
+                                <li><a href="" target="_blank"><i class="lab la-twitter"></i></a></li>
+                                <li><a href="" target="_blank"><i class="lab la-linkedin-in"></i></a></li>
+                                <li><a href="" target="_blank"><i class="lab la-instagram"></i></a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+        </div>
+    </div>
+</section>
+{% endblock %}

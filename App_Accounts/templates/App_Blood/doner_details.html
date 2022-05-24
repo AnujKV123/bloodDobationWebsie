@@ -1,0 +1,131 @@
+
+{% extends 'App_Blood/baseDonor.html' %}
+{% load static %}
+{% block content %}
+<div class="main-wrapper" style="min-height: calc(100vh - 754px);">
+            <div class="profile-header dark--overlay bg_img" style="background-image: url({% static 'assets/images/frontend/breadcrumb/61023f89990b81627537289.jpg' %});">
+	<div class="container">
+		<div class="row">
+			<div class="col-lg-12">
+				<div class="donor-profile">
+					<div class="donor-profile__thumb">
+						<img src="{{ single_doner.image.url }}" alt="image">
+					</div>
+					<div class="donor-profile__content">
+						<h3 class="donor-profile__name">{{ single_doner.user }}</h3>
+						<p><i class="las la-map-marker-alt mt-2"></i> Location : {{ single_doner.address }}</p>
+						<ul class="d-flex flex-wrap align-items-center donor-card__social justify-content-center mt-1">
+                            <li><a href="{{ single_doner.facebook }}" target="_blank">
+                                <i class="lab la-facebook-f"></i></a>
+                            </li>
+                            <li><a href="{{ single_doner.twitter }}" target="_blank" tabindex="-1"><i class="lab la-twitter"></i></a></li>
+                            <li><a href="{{ single_doner.linkedin }}" target="_blank" tabindex="-1"><i class="lab la-linkedin-in"></i></a></li>
+                            <li><a href="{{ single_doner.instragam }}" tabindex="-1"><i class="lab la-instagram"></i></a></li>
+                        </ul>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="blood-donor-info-area">
+			<div class="row justify-content-center">
+				<div class="col-xl-3 col-lg-4">
+					<div class="dono-info-item d-flex align-items-center justify-content-center">
+						<h5 class="text-white me-3"><i class="las la-tint"></i> Blood Group : </h5>
+						<p class="text--base">{{ single_doner.bloodgroup }}</p>
+					</div>
+				</div>
+				<div class="col-xl-3 col-lg-4 mt-lg-0 mt-3">
+					<div class="dono-info-item d-flex align-items-center justify-content-center">
+						<h5 class="text-white me-3"><i class="las la-calendar-check"></i> Last Donate : </h5>
+						<p class="text--base">{{ single_doner.lastdonate }}</p>
+					</div>
+				</div>
+				<div class="col-xl-3 col-lg-4 mt-lg-0 mt-3">
+					<div class="dono-info-item d-flex align-items-center justify-content-center">
+						<h5 class="text-white me-3"><i class="las la-clipboard-list"></i> Total Donate : </h5>
+						<p class="text--base">{{ single_doner.totaldonate }}</p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<section class="pt-100 pb-50 shade--bg">
+	<div class="container">
+		<div class="row gy-4">
+			<div class="col-lg-8 pe-lg-5">
+				<h3>Donor Details</h3>
+				<p class="mt-2">{{ single_doner.aboutyou }}</p>
+				<ul class="caption-list-two mt-4">
+					<li>
+						<span class="caption">Name</span>
+						<span class="value">{{ single_doner.user.first_name }} {{ single_doner.user.last_name }}</span>
+					</li>
+					<li>
+						<span class="caption">Gender</span>
+						<span class="value"> {{ single_doner.gender }} </span>
+					</li>
+					<li>
+						<span class="caption">Date of Birth</span>
+						<span class="value">{{ single_doner.dob }}</span>
+					</li>
+					<li>
+						<span class="caption">Age</span>
+						<span class="value">0 Years</span>
+					</li>
+					<!-- <li>
+						<span class="caption">Religion</span>
+						<span class="value">{{ single_doner.religion }}</span>
+					</li> -->
+					<li>
+						<span class="caption">Email</span>
+						<span class="value">{{ single_doner.user.email }}</span>
+					</li>
+					<li>
+						<span class="caption">Phone</span>
+						<span class="value">{{ single_doner.phone }}</span>
+					</li>
+					<li>
+						<span class="caption">Address</span>
+						<span class="value">{{ single_doner.address }}</span>
+					</li>
+				</ul>
+			</div>
+			<div class="col-lg-4">
+                 {%for message in messages %}
+                 {%if "blood_request" in message.tags %}
+                <div class="alert alert-success alert-dismissible" role="alert">
+                    {{ message }}
+                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+                {% endif %}
+                {% endfor %}
+				<div class="section--bg2">
+					<div class="card-header">
+						<h5 class="text-white">Contact with Donor</h5>
+					</div>
+					<div class="card-body">
+
+						<form method="POST" action="{% url 'App_Blood:doner_details' single_doner.id %}" class="contact-donor-form">{% csrf_token %}
+                         <input type="hidden" name="next" value="{{ request.path }}">
+                        <div class="form-group">
+                            <input type="text" name="name" value="" class="form--control form-control-md" placeholder="Enter name" maxlength="80" required="" />
+                        </div>
+                        <div class="form-group">
+                            <input type="email" name="email" value="" class="form--control form-control-md" placeholder="Enter email" maxlength="80" required="" />
+                        </div>
+                        <div class="form-group">
+                            <textarea name="message" class="form--control" placeholder="Message" maxlength="500" required=""></textarea>
+                        </div>
+                        <button type="submit" class="btn btn--base w-100">Message Now</button>
+                    </form>
+
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+        </div>
+{% endblock %}
