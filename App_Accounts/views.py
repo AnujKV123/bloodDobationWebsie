@@ -10,6 +10,11 @@ from rest_framework.decorators import api_view
 from rest_framework import status
 from rest_framework import response
 from twilio.rest import Client
+import datetime
+from django.http import HttpResponse
+from django.views.generic import View
+
+from App_Accounts.utils import render_to_pdf #created in step 4  
 
 
 
@@ -138,36 +143,66 @@ def PasswordChange(request):
 @login_required(login_url="App_Accounts:login")
 def save_Apportionment(request):
     user = request.user
-    name = request.POST['name']
-    gender = request.POST['gender']
-    date_of_birth = request.POST['date_of_birth']
-    mobile_no = request.POST['mobile_no']
-    address = request.POST['address']
-    apportionment_date = request.POST['apportionment_date']
-    state = request.POST['state']
-    city = request.POST['city']
-    blood_bank_name = request.POST['blood_bank_name']
-    blood_group = request.POST['blood_group']
-    # g_id = request.POST['g_id']
-    SaveApportionment = user_Apportionment(user=user, name=name, gender=gender, date_of_birth=date_of_birth, mobile_no= mobile_no, address=address, apportionment_date=apportionment_date,state=state, city=city, blood_bank_name=blood_bank_name, blood_group=blood_group)
-    SaveApportionment.save()
-    messages.success(request, 'your Apportionment is sucessfully Booked!!')
-    return redirect('/accounts/dashboard')
+    TodayDayte = datetime.date.today()
+    objxx = Profile.objects.get(user=user)
+    objyy = objxx.lastdonate
+    objzz = datetime.date(objyy.year, objyy.month, objyy.day)
+    aaac = str(TodayDayte-objzz)
+    if(aaac == "0:00:00"):
+        messages.error(request, "your are Currently Not Elegible for Donating the Blood. You Elegible after 90 days !!")
+        return redirect('/accounts/dashboard')
+    else:
+        bbbc = aaac.split(", ")
+        cccc = bbbc[0].split(" ")
+        varxxxy = 90-int(cccc[0])
+        if(int(cccc[0])>=90):
+            name = request.POST['name']
+            gender = request.POST['gender']
+            date_of_birth = request.POST['date_of_birth']
+            mobile_no = request.POST['mobile_no']
+            address = request.POST['address']
+            apportionment_date = request.POST['apportionment_date']
+            state = request.POST['state']
+            city = request.POST['city']
+            blood_bank_name = request.POST['blood_bank_name']
+            blood_group = request.POST['blood_group']
+            # g_id = request.POST['g_id']
+            SaveApportionment = user_Apportionment(user=user, name=name, gender=gender, date_of_birth=date_of_birth, mobile_no= mobile_no, address=address, apportionment_date=apportionment_date,state=state, city=city, blood_bank_name=blood_bank_name, blood_group=blood_group)
+            SaveApportionment.save()
+            obj = Profile.objects.get(user=user)
+            obj.points += 15
+            obj.lastdonate = apportionment_date
+            obj.latestHospital = blood_bank_name
+            obj.latestCity = city
+            obj.latestName =name
+            obj.save()
+            messages.success(request, 'your Apportionment is sucessfully Booked!!')
+            return redirect('/accounts/dashboard')
+        else:
+            messages.error(request, 'your are Currently Not Elegible for Donating the Blood. You Elegible after '+str(varxxxy)+" days !!")
+            return redirect('/accounts/dashboard')
 
 
 @login_required(login_url="App_Accounts:login")
 def reward(request):
     user = request.user
     fetchProfile = Profile.objects.filter(user = user)
-    print(fetchProfile)
     
     return render(request, 'App_User/store.html', {
         'fetchProfile': fetchProfile
     })
 
 @login_required(login_url="App_Accounts:login")
+def Certificate(request):
+    user = request.user
+    fechPData = Profile.objects.filter(user = user)
+    dataxx = {'fechPData':fechPData}
+    pdf = render_to_pdf('certificate.html', dataxx)
+    return HttpResponse(pdf, content_type='application/pdf')
+
+@login_required(login_url="App_Accounts:login")
 @api_view(['POST'])
-def pudatePonts(request):
+def updatePoints(request):
     if request.method == 'POST':
         userx = request.user
         contactX = request.data
@@ -180,14 +215,14 @@ def pudatePonts(request):
         print(status)
         Profile.objects.filter(user = userx).update(points = status)
         userMessage = "Thank you for placing an order in the BloodLab Rewards Zone. Your order is being processed! "
-        account_sid = 'AC471dff6d731fc3a6d315266efd0677d8'
-        auth_token = '350a1944983cd84dbfb54368cbcd11ae'
+        account_sid = 'ACc17206d59f27e0c0be30ceb0d08cc5d7'
+        auth_token = '51c140fe5515c1cd0192697cf3916193'
         client = Client(account_sid, auth_token)
 
         client.messages.create(
-            from_='+17578565493',
+            from_='+15864602797',
             body= userMessage,
-            to='+916207821790'
+            to='+919334717500'
                             )          
         return response(status=status.HTTP_201_CREATED)
     else:

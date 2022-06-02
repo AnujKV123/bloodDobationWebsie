@@ -9,7 +9,7 @@
   <meta name="description" content="">
   <meta name="author" content="">
   <title>{% block title %}
-Blood Group
+BloodLab
   {% endblock %}</title>
   <link href="{% static 'superadmin/vendor/fontawesome-free/css/all.min.css' %}" rel="stylesheet" type="text/css">
   <link href="{% static 'superadmin/vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet" type="text/css">
@@ -353,7 +353,7 @@ const csrftoken = getCookie('csrftoken');
         if(confirm(text) == true){
           const y = a
           console.log(y)
-          fetch("http://127.0.0.1:8000/accounts/pudatePonts/", {
+          fetch("http://127.0.0.1:8000/accounts/updatePoints/", {
           // Adding method type
           method: "POST",
           

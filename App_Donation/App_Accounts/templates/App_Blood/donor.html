@@ -1,0 +1,117 @@
+{% extends 'App_Blood/baseDonor.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block content %}
+<style>
+.form-control{
+    height: 50px;
+}
+.form-group {
+    margin-bottom: 0;
+}
+</style>
+<div class="main-wrapper">
+<section class="inner-hero bg_img overlay--one" style="background-image: url('{% static 'assets/images/frontend/breadcrumb/61023f89990b81627537289.jpg' %}');">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-6 text-center">
+                <h2 class="page-title text-white">All Donor</h2>
+                <ul class="page-breadcrumb justify-content-center">
+                    <li><a href="{% url 'App_Blood:index' %}">Home</a></li>
+                    <li>All Donor</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
+<div class="donor-search-area">
+    <div class="container">
+        <form method="GET" action="" class="donor-search-form">
+            <div class="donor-search-form__field">
+               {{ myfilter.form.bloodgroup|as_crispy_field  }}
+            </div>
+
+            <div class="donor-search-form__field">
+                {{ myfilter.form.city|as_crispy_field  }}
+            </div>
+
+            <!-- <div class="donor-search-form__field">
+               {{ myfilter.form.religion|as_crispy_field  }}
+            </div> -->
+
+            <div class="donor-search-form__field">
+                {{ myfilter.form.gender|as_crispy_field  }}
+            </div>
+
+            <div class="donor-search-form__btn">
+                <button type="submit" class="btn btn-md btn--base">Search</button>
+            </div>
+        </form>
+    </div>
+</div>
+<section class="pt-50 pb-50 shade--bg">
+    <div class="container">
+        <div class="row">
+        <div class="col-xl-12 col-lg-9 col-md-12">
+             <div class="row gy-4">
+                {% for post in all_doners %}
+
+                <div class="col-lg-4 col-md-6 col-sm-12">
+                            <div class="donor-item has--link">
+                                <a href="{% url 'App_Blood:doner_details' post.id %}" class="item--link"></a>
+                                <div class="donor-item__thumb">
+                                    <img src="{{ post.image.url }}" alt="image">
+                                </div>
+                                <div class="donor-item__content">
+                                    <h5 class="donor-item__name">{{ post.user }}</h5>
+                                    <ul class="donor-item__list mt-2">
+                                        <li class="text-truncate">
+                                            <i class="las la-map-marker-alt"></i> Location : {{ post.city }}
+                                        </li>
+                                        <li>
+                                            <i class="las la-tint"></i>Blood Group : <span class="text--base">({{ post.bloodgroup }})</span>
+                                        </li>
+                                    </ul>
+                                    <a href="{% url 'App_Blood:doner_details' post.id %}" class="text--base fs--14px text-decoration-underline">View Profile</a>
+                                </div>
+                            </div>
+                        </div>
+                {% empty %}
+                <h5>There is no doner</h5>
+                {% endfor %}
+             </div>
+                <nav class="mt-4 pagination-md">
+                 {% if all_doners.has_other_pages %}
+                <nav>
+               <ul class="pagination">
+                        {% if all_doners.has_previous %}
+                        <li class="page-item">
+                          <a class="page-link" href="?page={{ all_doners.previous_page_number }}" aria-label="Previous">
+                            <span aria-hidden="true">&laquo;</span>
+                          </a>
+                        </li>
+                         {% endif %}
+                        {% for i in all_doners.paginator.page_range %}
+                        {% if all_doners.number == i %}
+                         <li class="page-item"><a class="page-link bg-success text-light">{{ i }}</a></li>
+                        {% else %}
+                         <li class="page-item"><a class="page-link" href="?page={{ i }}">{{ i }}</a></li>
+                        {% endif %}
+                        {% endfor %}
+                         {% if all_doners.has_next %}
+                        <li class="page-item">
+                          <a class="page-link" href="?page={{ all_doners.next_page_number }}" aria-label="Next">
+                            <span aria-hidden="true">&raquo;</span>
+                          </a>
+                        </li>
+                        {% endif %}
+                      </ul>
+    </nav>
+                {% endif %}
+</nav>
+</div>
+        </div>
+    </div>
+</section>
+        </div>
+{% endblock %}
