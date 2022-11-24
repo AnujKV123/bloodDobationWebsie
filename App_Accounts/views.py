@@ -172,6 +172,7 @@ def save_Apportionment(request):
             obj = Profile.objects.get(user=user)
             obj.points += 15
             obj.lastdonate = apportionment_date
+            obj.totalDonationCount += 1
             obj.latestHospital = blood_bank_name
             obj.latestCity = city
             obj.latestName =name

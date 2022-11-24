@@ -63,7 +63,7 @@
                                     <img src="{{ post.image.url }}" alt="image">
                                 </div>
                                 <div class="donor-item__content">
-                                    <h5 class="donor-item__name">{{ post.user }}</h5>
+                                    <h5 class="donor-item__name">{{ post.user.first_name }}&#160{{ post.user.last_name }}</h5>
                                     <ul class="donor-item__list mt-2">
                                         <li class="text-truncate">
                                             <i class="las la-map-marker-alt"></i> Location : {{ post.city }}
