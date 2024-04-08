@@ -7,6 +7,10 @@ from ckeditor_uploader.views import upload
 from ckeditor_uploader import views
 from django.views.decorators.cache import never_cache
 from django.views.static import serve
+
+from django.contrib.staticfiles.urls import staticfiles_urlpatterns
+
+
 admin.site.site_header = 'BloodLab Admin'
 admin.site.site_title = 'Welcome to BloodLab'
 urlpatterns = [
@@ -21,3 +25,5 @@ urlpatterns = [
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
     urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+
+urlpatterns += staticfiles_urlpatterns()
