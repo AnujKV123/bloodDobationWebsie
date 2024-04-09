@@ -1,0 +1,6 @@
+services:
+  - type: web
+    name: your_django_app_name
+    buildCommand: "./build.sh"
+    env: python
+    startCommand: "gunicorn BloodDonation.wsgi:application"
